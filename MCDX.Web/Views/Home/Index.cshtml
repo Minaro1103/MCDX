@@ -1,0 +1,110 @@
+@model MCDX.Web.Models.OperationsDashboardViewModel
+@{
+    ViewData["Title"] = Model.PageTitle;
+    var isTools = Model.ActiveSection is "Tools" or "BladeExchange";
+}
+
+<div class="workspace">
+    <aside class="sidebar">
+        <div class="side-title">サイト選択</div>
+        @foreach (var site in Model.Sites)
+        {
+            <section class="site-card @(site.Name == "阿久比" ? "active" : "")">
+                <div class="site-photo"></div>
+                <div>
+                    <strong>@site.Name</strong>
+                    <span>@site.State</span>
+                    <small>稼働率 @site.OperationRate% / アラーム @site.Alarms 件</small>
+                </div>
+            </section>
+        }
+
+        <div class="side-title mt-4">@(isTools ? "工具メニュー" : "負荷管理メニュー")</div>
+        <a class="side-link @(Model.ActiveSection == "Dashboard" ? "active" : "")" asp-action="Index">ダッシュボード</a>
+        <a class="side-link @(Model.ActiveSection == "Facilities" ? "active" : "")" asp-action="Facilities">設備一覧</a>
+        <a class="side-link @(Model.ActiveSection == "Tools" ? "active" : "")" asp-action="Tools">刃物リスト</a>
+        <a class="side-link @(Model.ActiveSection == "BladeExchange" ? "active" : "")" asp-action="BladeExchange">刃具交換リスト</a>
+        <a class="side-link" href="#">工具在庫</a>
+        <a class="side-link" href="#">レポート出力</a>
+        <a class="back-link" asp-action="Index">← ダッシュボードに戻る</a>
+    </aside>
+
+    <section class="content">
+        <div class="page-head">
+            <div>
+                <h1>@Model.PageTitle</h1>
+                <p>@Model.PageSubtitle</p>
+            </div>
+            <div class="head-actions">
+                <span>更新 08:45</span>
+                <button type="button">フィルター</button>
+                <button type="button" class="primary">+ 新規登録</button>
+            </div>
+        </div>
+
+        @if (Model.ActiveSection == "BladeExchange")
+        {
+            <partial name="_BladeExchangePanel" model="Model" />
+        }
+        else
+        {
+            <section class="metric-grid">
+                @foreach (var metric in Model.Metrics)
+                {
+                    <article class="metric-card">
+                        <span>@metric.Label</span>
+                        <strong>@metric.Value<small>@metric.Unit</small></strong>
+                        <em class="@metric.Tone">@metric.Delta</em>
+                    </article>
+                }
+            </section>
+
+            @if (Model.ActiveSection == "Dashboard" || Model.ActiveSection == "LoadSummary")
+            {
+                <section class="dashboard-grid">
+                    <article class="panel wide">
+                        <div class="panel-head">
+                            <h2>負荷予測（阿久比）</h2>
+                            <span>日次</span>
+                        </div>
+                        <div class="line-chart">
+                            <span style="height:22%"></span><span style="height:34%"></span><span style="height:46%"></span>
+                            <span style="height:55%"></span><span style="height:70%"></span><span style="height:83%"></span>
+                            <span style="height:66%"></span><span style="height:58%"></span><span style="height:49%"></span>
+                        </div>
+                        <div class="chart-footer">
+                            <b>ピーク負荷 96%</b><b>設備稼働率 92%</b><b>余力 8%</b>
+                        </div>
+                    </article>
+                    <article class="panel score">
+                        <h2>今日の作業スコア</h2>
+                        <div class="score-ring">78<span>点</span></div>
+                        <div class="score-list"><span>稼働率 92%</span><span>工具寿命 85%</span><span>異常 1件</span></div>
+                    </article>
+                    <article class="panel">
+                        <h2>サイト全体サマリ</h2>
+                        @foreach (var site in Model.Sites)
+                        {
+                            <div class="summary-row"><span>@site.Name</span><b>@site.OperationRate%</b><i style="width:@site.OperationRate%"></i></div>
+                        }
+                    </article>
+                    <article class="panel">
+                        <h2>負荷アラート</h2>
+                        <div class="alert-row danger">寿命切れ間近 <strong>2件</strong></div>
+                        <div class="alert-row warn">交換推奨 <strong>4件</strong></div>
+                        <div class="alert-row info">計画交換 <strong>3件</strong></div>
+                    </article>
+                </section>
+            }
+
+            @if (Model.ActiveSection == "Facilities")
+            {
+                <partial name="_MachineTable" model="Model" />
+            }
+            else
+            {
+                <partial name="_ToolTable" model="Model" />
+            }
+        }
+    </section>
+</div>

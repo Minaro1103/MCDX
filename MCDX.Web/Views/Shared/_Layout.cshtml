@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MCDX</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="app-shell">
+    <header class="topbar">
+        <a class="brand" asp-controller="Home" asp-action="Index">
+            <span class="brand-mark">A</span>
+            <span>ARCBASE</span>
+        </a>
+        <nav class="topnav">
+            <a asp-controller="Home" asp-action="Index">⌂ ダッシュボード</a>
+            <a asp-controller="Home" asp-action="Facilities">▦ 設備</a>
+            <a asp-controller="Home" asp-action="Tools">✣ 工具</a>
+            <a asp-controller="Home" asp-action="BladeExchange">▤ 作業記録</a>
+            <a asp-controller="Home" asp-action="LoadSummary">⌁ 負荷管理</a>
+            <a href="#">▥ ランキング</a>
+            <a href="#">⚙ 設定</a>
+        </nav>
+        <div class="operator">
+            <span class="notice">●</span>
+            <span class="avatar">山</span>
+            <div>
+                <strong>山田 太郎</strong>
+                <small>第1製造課 A組</small>
+            </div>
+        </div>
+    </header>
+    <main role="main">
+        @RenderBody()
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

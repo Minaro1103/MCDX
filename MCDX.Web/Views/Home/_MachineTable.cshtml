@@ -1,0 +1,32 @@
+@model MCDX.Web.Models.OperationsDashboardViewModel
+
+<section class="panel table-panel">
+    <div class="panel-head">
+        <h2>設備一覧</h2>
+        <div class="table-tools"><input placeholder="設備名・機種で検索" /><button type="button">表示設定</button></div>
+    </div>
+    <div class="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>設備名 / 機種</th><th>グループ</th><th>ステータス</th><th>稼働率</th><th>現在負荷</th><th>負荷予測</th><th>アラーム / 注意</th><th>最終更新</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var machine in Model.Machines)
+                {
+                    <tr>
+                        <td><div class="machine-cell"><span class="machine-thumb"></span><b>@machine.Code</b><small>@machine.Maker</small></div></td>
+                        <td>@machine.Group</td>
+                        <td><span class="status @machine.Status">@machine.Status</span></td>
+                        <td><span class="bar"><i style="width:@machine.OperationRate%"></i></span>@machine.OperationRate%</td>
+                        <td><span class="load"><i style="width:@machine.LoadRate%"></i></span>@machine.LoadRate%</td>
+                        <td><span class="sparkline"></span>@machine.Forecast%</td>
+                        <td>@machine.Alert</td>
+                        <td>@machine.LastUpdate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

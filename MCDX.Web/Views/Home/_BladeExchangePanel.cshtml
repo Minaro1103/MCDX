@@ -1,0 +1,56 @@
+@model MCDX.Web.Models.OperationsDashboardViewModel
+
+<section class="exchange-grid">
+    <article class="panel barcode-panel">
+        <h2>バーコード読取</h2>
+        <div class="barcode">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <button type="button">カメラで読み取る</button>
+    </article>
+    <article class="panel selected-tool">
+        <h2>読取結果</h2>
+        <div class="machine-preview"></div>
+        <b>DMG MORI CMX600</b>
+        <p>工具 AE-VMS1000 / 現在寿命 78% / 最終更新 08:45</p>
+    </article>
+    <article class="panel alerts">
+        <h2>交換アラート（直近7日）</h2>
+        <div class="alert-row danger">寿命切れ間近 <strong>2件</strong></div>
+        <div class="alert-row warn">交換推奨 <strong>4件</strong></div>
+        <div class="alert-row info">計画交換 <strong>3件</strong></div>
+    </article>
+</section>
+
+<section class="panel table-panel">
+    <div class="panel-head">
+        <h2>刃具交換リスト</h2>
+        <div class="table-tools"><button type="button">表示設定</button><button type="button">CSVエクスポート</button></div>
+    </div>
+    <div class="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th><th>刃具コード</th><th>刃具名</th><th>工具種別</th><th>使用設備</th><th>現在寿命</th><th>残寿命</th><th>状態</th><th>交換推奨日</th><th>次回交換予定</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BladeExchanges)
+                {
+                    <tr>
+                        <td>@item.No</td>
+                        <td>@item.Code</td>
+                        <td>@item.Name</td>
+                        <td><span class="tag">@item.Type</span></td>
+                        <td>@item.Machine</td>
+                        <td><span class="bar"><i style="width:@item.LifeRate%"></i></span>@item.LifeRate%</td>
+                        <td>@item.Remaining%</td>
+                        <td><span class="status @item.Status">@item.Status</span></td>
+                        <td>@item.ChangeDate</td>
+                        <td>@item.NextPlan</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

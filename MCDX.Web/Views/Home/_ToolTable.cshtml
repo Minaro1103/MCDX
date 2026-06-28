@@ -1,0 +1,34 @@
+@model MCDX.Web.Models.OperationsDashboardViewModel
+
+<section class="panel table-panel">
+    <div class="panel-head">
+        <h2>刃物リスト</h2>
+        <div class="table-tools"><input placeholder="工具名・型番・設備名で検索" /><button type="button">エクスポート</button></div>
+    </div>
+    <div class="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th><th>工具コード</th><th>工具名</th><th>工具種別</th><th>コーティング</th><th>使用設備</th><th>現在寿命</th><th>残寿命</th><th>ステータス</th><th>次回交換予定</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tool in Model.Tools)
+                {
+                    <tr>
+                        <td>@tool.No</td>
+                        <td>@tool.Code</td>
+                        <td><div class="tool-name"><span class="tool-thumb"></span><b>@tool.Name</b></div></td>
+                        <td><span class="tag">@tool.Category</span></td>
+                        <td>@tool.Coating</td>
+                        <td>@tool.Machine</td>
+                        <td><span class="bar"><i style="width:@tool.LifeRate%"></i></span>@tool.LifeRate%</td>
+                        <td>@tool.Remaining%</td>
+                        <td><span class="status @tool.Status">@tool.Status</span></td>
+                        <td>@tool.NextChange</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
