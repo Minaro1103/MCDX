@@ -36,9 +36,24 @@ public class HomeController : Controller
         return View("Index", _operationsData.GetDashboard("BladeExchange", "刃具交換リスト", "バーコード読み取りと交換アラートを使う想定の画面です。"));
     }
 
+    public IActionResult WorkLogs()
+    {
+        return View("Index", _operationsData.GetDashboard("WorkLogs", "作業記録", "作業履歴、点検記録、申し送りを確認する画面です。"));
+    }
+
     public IActionResult LoadSummary()
     {
         return View("Index", _operationsData.GetDashboard("LoadSummary", "負荷サマリ（阿久比）", "設備負荷と作業予測をダッシュボード形式で表示します。"));
+    }
+
+    public IActionResult Ranking()
+    {
+        return View("Index", _operationsData.GetDashboard("Ranking", "ランキング", "作業スコア、改善提案、設備稼働のランキングを表示します。"));
+    }
+
+    public IActionResult Settings()
+    {
+        return View("Index", _operationsData.GetDashboard("Settings", "設定", "サイト、設備、権限、通知条件などを管理します。"));
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

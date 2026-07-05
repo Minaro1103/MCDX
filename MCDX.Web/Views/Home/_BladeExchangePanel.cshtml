@@ -1,56 +1,90 @@
 @model MCDX.Web.Models.OperationsDashboardViewModel
 
-<section class="exchange-grid">
-    <article class="panel barcode-panel">
-        <h2>バーコード読取</h2>
-        <div class="barcode">
-            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <button type="button">カメラで読み取る</button>
-    </article>
-    <article class="panel selected-tool">
-        <h2>読取結果</h2>
-        <div class="machine-preview"></div>
-        <b>DMG MORI CMX600</b>
-        <p>工具 AE-VMS1000 / 現在寿命 78% / 最終更新 08:45</p>
-    </article>
-    <article class="panel alerts">
-        <h2>交換アラート（直近7日）</h2>
-        <div class="alert-row danger">寿命切れ間近 <strong>2件</strong></div>
-        <div class="alert-row warn">交換推奨 <strong>4件</strong></div>
-        <div class="alert-row info">計画交換 <strong>3件</strong></div>
-    </article>
-</section>
+<section class="blade-exchange-page">
+    <section class="exchange-grid blade-scan-grid">
+        <article class="panel barcode-panel blade-scan-panel">
+            <h2>バーコード読取</h2>
+            <div class="barcode-frame">
+                <div class="scan-corners"></div>
+                <div class="barcode">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <strong>DMG-MORI-CMX600-CH01</strong>
+            </div>
+            <button type="button" class="camera-button">▣ カメラで読み取る</button>
+        </article>
 
-<section class="panel table-panel">
-    <div class="panel-head">
-        <h2>刃具交換リスト</h2>
-        <div class="table-tools"><button type="button">表示設定</button><button type="button">CSVエクスポート</button></div>
-    </div>
-    <div class="data-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>No.</th><th>刃具コード</th><th>刃具名</th><th>工具種別</th><th>使用設備</th><th>現在寿命</th><th>残寿命</th><th>状態</th><th>交換推奨日</th><th>次回交換予定</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.BladeExchanges)
-                {
+        <article class="panel blade-input-panel">
+            <h2>または　手入力</h2>
+            <div class="manual-input">
+                <input placeholder="設備ID / QRコード / 刃具コードを入力" />
+                <button type="button" class="primary">表示</button>
+            </div>
+            <div class="equipment-result-card">
+                <div class="machine-photo"></div>
+                <div>
+                    <span class="mini-label">設備情報</span>
+                    <h3>DMG MORI CMX600</h3>
+                    <dl>
+                        <div><dt>設備ID</dt><dd>DMG-MORI-CMX600-CH01</dd></div>
+                        <div><dt>設置場所</dt><dd>阿久比工場 第1製造課</dd></div>
+                        <div><dt>現在の稼働率</dt><dd>78%</dd></div>
+                        <div><dt>最終更新</dt><dd>2024/05/27 08:45</dd></div>
+                    </dl>
+                </div>
+                <span class="status 稼働中">稼働中</span>
+            </div>
+        </article>
+
+        <article class="panel exchange-alert-panel">
+            <h2>交換アラート（直近7日）</h2>
+            <div class="exchange-alert-row danger">寿命切れ間近 <strong>2 件</strong></div>
+            <div class="exchange-alert-row warn">交換推奨 <strong>4 件</strong></div>
+            <div class="exchange-alert-row info">計画交換 <strong>3 件</strong></div>
+            <button type="button">アラート一覧へ ›</button>
+        </article>
+    </section>
+
+    <section class="panel table-panel blade-table-panel">
+        <div class="panel-head">
+            <h2>刃具交換リスト</h2>
+            <div class="table-tools"><button type="button">⚙ 表示設定</button><button type="button" class="primary">↓ CSVエクスポート</button></div>
+        </div>
+        <div class="data-table blade-data-table">
+            <table>
+                <thead>
                     <tr>
-                        <td>@item.No</td>
-                        <td>@item.Code</td>
-                        <td>@item.Name</td>
-                        <td><span class="tag">@item.Type</span></td>
-                        <td>@item.Machine</td>
-                        <td><span class="bar"><i style="width:@item.LifeRate%"></i></span>@item.LifeRate%</td>
-                        <td>@item.Remaining%</td>
-                        <td><span class="status @item.Status">@item.Status</span></td>
-                        <td>@item.ChangeDate</td>
-                        <td>@item.NextPlan</td>
+                        <th><input type="checkbox" /></th>
+                        <th>No.</th><th>刃具コード</th><th>刃具名</th><th>工具種別</th><th>使用設備</th><th>現在寿命</th><th>寿命基準</th><th>残寿命</th><th>状態</th><th>交換推奨日</th><th>次回交換予定</th><th>操作</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.BladeExchanges)
+                    {
+                        var remainingText = item.Remaining <= 10 ? $"{item.Remaining}%（{item.Remaining * 2}分）" : $"{item.Remaining}%（{item.Remaining * 10}穴）";
+                        <tr>
+                            <td><input type="checkbox" /></td>
+                            <td>@item.No</td>
+                            <td>@item.Code</td>
+                            <td><b>@item.Name</b></td>
+                            <td><span class="tag">@item.Type</span></td>
+                            <td><b>@item.Machine</b><small>MAKINO V56</small></td>
+                            <td><span class="bar"><i style="width:@item.LifeRate%"></i></span>@item.LifeRate%</td>
+                            <td>100%</td>
+                            <td>@remainingText</td>
+                            <td><span class="status @item.Status">@item.Status</span></td>
+                            <td>@item.ChangeDate<br /><small>（あと2日）</small></td>
+                            <td>@item.NextPlan</td>
+                            <td class="row-menu">⋮</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <span>1 - 6 / 6 件</span>
+            <div class="pager"><button type="button">‹‹</button><button type="button">‹</button><button type="button" class="primary">1</button><button type="button">›</button><button type="button">››</button></div>
+            <span>表示件数 <b>20件</b></span>
+        </div>
+    </section>
 </section>

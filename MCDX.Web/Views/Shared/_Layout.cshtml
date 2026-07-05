@@ -1,3 +1,7 @@
+@{
+    var activeTop = ViewData["ActiveTop"] as string ?? "Dashboard";
+    string Active(string name) => activeTop == name ? "active" : "";
+}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,16 +18,16 @@
             <span>ARCBASE</span>
         </a>
         <nav class="topnav">
-            <a asp-controller="Home" asp-action="Index">⌂ ダッシュボード</a>
-            <a asp-controller="Home" asp-action="Facilities">▦ 設備</a>
-            <a asp-controller="Home" asp-action="Tools">✣ 工具</a>
-            <a asp-controller="Home" asp-action="BladeExchange">▤ 作業記録</a>
-            <a asp-controller="Home" asp-action="LoadSummary">⌁ 負荷管理</a>
-            <a href="#">▥ ランキング</a>
-            <a href="#">⚙ 設定</a>
+            <a class="@Active("Dashboard")" asp-controller="Home" asp-action="Index">⌂ ダッシュボード</a>
+            <a class="@Active("Facilities")" asp-controller="Home" asp-action="Facilities">▦ 設備</a>
+            <a class="@Active("Tools")" asp-controller="Home" asp-action="Tools">✣ 工具</a>
+            <a class="@Active("WorkLogs")" asp-controller="Home" asp-action="WorkLogs">▤ 作業記録</a>
+            <a class="@Active("LoadSummary")" asp-controller="Home" asp-action="LoadSummary">⌁ 負荷管理</a>
+            <a class="@Active("Ranking")" asp-controller="Home" asp-action="Ranking">▥ ランキング</a>
+            <a class="@Active("Settings")" asp-controller="Home" asp-action="Settings">⚙ 設定</a>
         </nav>
         <div class="operator">
-            <span class="notice">●</span>
+            <span class="notice-dot"></span>
             <span class="avatar">山</span>
             <div>
                 <strong>山田 太郎</strong>

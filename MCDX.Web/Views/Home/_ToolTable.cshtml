@@ -1,11 +1,44 @@
 @model MCDX.Web.Models.OperationsDashboardViewModel
+@{
+    var filterItems = new[]
+    {
+        ("square", "スクエア"),
+        ("long-square", "ロングネック\nスクエア"),
+        ("ball", "ボール"),
+        ("long-ball", "ロングネック\nボール"),
+        ("taper-ball", "テーパネック\nボール"),
+        ("radius", "ラジアス"),
+        ("long-radius", "ロングネック\nラジアス"),
+        ("taper-radius", "テーパネック\nラジアス"),
+        ("taper", "テーパ"),
+        ("barrel", "バレル"),
+        ("chamfer", "面取り"),
+        ("drill", "ドリル"),
+        ("thread", "ねじ切り")
+    };
+}
+
+<section class="tool-filter-panel" data-tool-filter-panel>
+    <div class="tool-filter-grid">
+        @foreach (var item in filterItems)
+        {
+            <label class="tool-filter-item">
+                <input type="checkbox" value="@item.Item1" data-tool-filter />
+                <span class="fake-check"></span>
+                <b>@Html.Raw(item.Item2.Replace("\n", "<br />"))</b>
+                <i class="tool-shape @item.Item1"></i>
+            </label>
+        }
+    </div>
+    <button type="button" class="tool-filter-button" data-tool-filter-apply><span>⌕</span>絞り込む</button>
+</section>
 
 <section class="panel table-panel">
     <div class="panel-head">
         <h2>刃物リスト</h2>
         <div class="table-tools"><input placeholder="工具名・型番・設備名で検索" /><button type="button">エクスポート</button></div>
     </div>
-    <div class="data-table">
+    <div class="data-table tool-table">
         <table>
             <thead>
                 <tr>
@@ -15,7 +48,17 @@
             <tbody>
                 @foreach (var tool in Model.Tools)
                 {
-                    <tr>
+                    var shape = tool.Category switch
+                    {
+                        "ドリル" => "drill",
+                        "エンドミル" => tool.Name.Contains("ボール") ? "ball long-ball" : "square long-square radius",
+                        "タップ" => "thread taper",
+                        "面取り" => "chamfer",
+                        "旋削チップ" => "taper-radius",
+                        "溝入れ" => "barrel",
+                        _ => ""
+                    };
+                    <tr data-tool-row data-tool-tags="@shape">
                         <td>@tool.No</td>
                         <td>@tool.Code</td>
                         <td><div class="tool-name"><span class="tool-thumb"></span><b>@tool.Name</b></div></td>

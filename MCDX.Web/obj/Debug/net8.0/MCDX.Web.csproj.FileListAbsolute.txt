@@ -2,7 +2,6 @@ C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\appsettings.json
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\MCDX.Web.staticwebassets.runtime.json
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\MCDX.Web.staticwebassets.endpoints.json
-C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\MCDX.Web.exe
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\MCDX.Web.deps.json
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\MCDX.Web.runtimeconfig.json
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\MCDX.Web.dll
@@ -31,4 +30,14 @@ C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\obj\Debug\net8.0\swae.build.ex.cache
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\obj\Debug\net8.0\MCDX.Web.sourcelink.json
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\bin\Debug\net8.0\MCDX.Web.exe
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\appsettings.Development.json
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\appsettings.json
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\MCDX.Web.staticwebassets.runtime.json
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\MCDX.Web.staticwebassets.endpoints.json
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\MCDX.Web.deps.json
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\MCDX.Web.runtimeconfig.json
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\MCDX.Web.dll
+C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\buildcheck\MCDX.Web.pdb
 C:\Users\minat\OneDrive\ドキュメント\デスクトップ\Job\MCDX\MCDX.Web\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

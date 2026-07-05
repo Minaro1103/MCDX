@@ -39,7 +39,11 @@ public sealed class SampleOperationsData : IOperationsData
                 new("M/C 05", "DMG MORI NVX5100", "Cグループ", "メンテ中", 0, 0, 35, "定期点検中", "08:30"),
                 new("M/C 06", "OKUMA GENOS M560", "Dグループ", "稼働中", 93, 73, 88, "-", "08:45"),
                 new("M/C 07", "MAZAK QTE-200", "Eグループ", "停止中", 0, 0, 42, "材料切れ", "07:55"),
-                new("M/C 08", "DMG MORI CMX600", "Bグループ", "稼働中", 88, 65, 80, "-", "08:45")
+                new("M/C 08", "DMG MORI CMX600", "Bグループ", "停止中", 0, 0, 40, "-", "08:45"),
+                new("M/C 09", "OKK VM53R", "Aグループ", "稼働中", 91, 69, 82, "-", "08:45"),
+                new("M/C 10", "MAKINO V33", "Bグループ", "稼働中", 88, 60, 78, "-", "08:45"),
+                new("M/C 11", "FANUC ROBODRILL", "Cグループ", "稼働中", 90, 70, 86, "-", "08:45"),
+                new("M/C 12", "DMG MORI CMX800", "Dグループ", "停止中", 0, 0, 38, "段取り待ち", "08:45")
             ],
             Tools =
             [
